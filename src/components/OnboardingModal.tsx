@@ -42,7 +42,7 @@ export default function OnboardingModal({ onConcluir }: { onConcluir: () => void
             <span
               key={s.titulo}
               className={`h-1.5 rounded-full transition-all ${
-                i === passo ? 'w-6 bg-violet-500' : 'w-1.5 bg-white/15'
+                i === passo ? 'w-6 bg-brand-pink-500' : 'w-1.5 bg-white/15'
               }`}
             />
           ))}
@@ -61,7 +61,7 @@ export default function OnboardingModal({ onConcluir }: { onConcluir: () => void
           <button
             type="button"
             onClick={() => (ultimoPasso ? onConcluir() : setPasso((p) => p + 1))}
-            className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+            className="flex-1 rounded-xl bg-gradient-to-r from-brand-pink-500 to-brand-cyan-500 py-2.5 text-sm font-semibold text-white hover:opacity-90"
           >
             {ultimoPasso ? 'Começar' : 'Próximo'}
           </button>

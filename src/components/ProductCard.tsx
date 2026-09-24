@@ -14,8 +14,8 @@ const ONDA_LABEL: Record<Product['onda'], string> = {
 }
 
 const ONDA_COR: Record<Product['onda'], string> = {
-  'onda-inicial': 'bg-cyan-500/20 text-cyan-300',
-  'em-alta': 'bg-violet-500/20 text-violet-300',
+  'onda-inicial': 'bg-brand-cyan-500/20 text-brand-cyan-400',
+  'em-alta': 'bg-brand-pink-500/20 text-brand-pink-400',
   consolidado: 'bg-amber-500/20 text-amber-300',
   saturado: 'bg-gray-500/20 text-gray-400',
 }
@@ -28,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
     product.tendenciaSemanal[product.tendenciaSemanal.length - 1] >= product.tendenciaSemanal[0]
 
   return (
-    <div className="card-surface group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-900/20">
+    <div className="card-surface group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-[rgba(254,44,85,0.2)]">
       <Link to={`/produto/${product.id}`} className="flex flex-1 flex-col">
         <div className="relative aspect-square w-full overflow-hidden bg-black/20">
           <img

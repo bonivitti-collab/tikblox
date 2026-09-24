@@ -3,12 +3,19 @@
 @theme {
   --font-sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
 
-  --color-bg-base: #0b0f19;
-  --color-bg-surface: #131826;
-  --color-bg-elevated: #1a2033;
-  --color-border-subtle: #232a3d;
-  --color-accent-violet: #7c3aed;
-  --color-accent-cyan: #22d3ee;
+  --color-bg-base: #0b0c12;
+  --color-bg-surface: #14151d;
+  --color-bg-elevated: #1b1c26;
+  --color-border-subtle: #24252f;
+  --color-muted: #a6a7b2;
+  --color-brand-pink-50: #ffe4ea;
+  --color-brand-pink-400: #ff6b8a;
+  --color-brand-pink-500: #fe2c55;
+  --color-brand-pink-600: #e0143d;
+  --color-brand-pink-700: #b90f31;
+  --color-brand-cyan-400: #5ff8f3;
+  --color-brand-cyan-500: #25f4ee;
+  --color-brand-cyan-600: #12c9c4;
   --color-accent-green: #22c55e;
   --color-accent-amber: #f59e0b;
   --color-accent-red: #ef4444;
@@ -23,7 +30,7 @@ body,
 body {
   margin: 0;
   background: var(--color-bg-base);
-  color: #e5e7eb;
+  color: #f2f2f4;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -45,12 +52,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2b3348;
+  background: #2b2c38;
   border-radius: 999px;
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, var(--color-accent-violet), var(--color-accent-cyan));
+  background: linear-gradient(90deg, var(--color-brand-pink-500), var(--color-brand-cyan-500));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

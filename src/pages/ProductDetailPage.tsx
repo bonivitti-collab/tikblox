@@ -65,7 +65,7 @@ export default function ProductDetailPage() {
     return (
       <div className="card-surface rounded-2xl p-10 text-center">
         <p className="mb-4 text-sm text-gray-400">Produto não encontrado.</p>
-        <Link to="/" className="text-sm font-medium text-violet-400 hover:underline">
+        <Link to="/" className="text-sm font-medium text-brand-pink-400 hover:underline">
           Voltar para Todos os Produtos
         </Link>
       </div>
@@ -136,7 +136,7 @@ export default function ProductDetailPage() {
             <button
               type="button"
               onClick={compartilhar}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-pink-500 to-brand-cyan-500 py-2.5 text-sm font-semibold text-white hover:opacity-90"
             >
               {linkCopiado ? '✅ Link copiado' : '🔗 Compartilhar'}
             </button>
@@ -145,7 +145,7 @@ export default function ProductDetailPage() {
           <Link
             to="/calculadora"
             state={{ custo: produto.custo, precoVenda: produto.precoSugerido }}
-            className="text-center text-xs font-medium text-violet-400 hover:underline"
+            className="text-center text-xs font-medium text-brand-pink-400 hover:underline"
           >
             Simular lucro na calculadora →
           </Link>
@@ -231,7 +231,7 @@ export default function ProductDetailPage() {
         <ol className="flex flex-col gap-3">
           {produto.planoDeAcao.map((passo, index) => (
             <li key={passo.titulo} className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-violet-600/20 text-xs font-bold text-violet-300">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-pink-500/20 text-xs font-bold text-brand-pink-400">
                 {index + 1}
               </span>
               <div>

@@ -6,7 +6,7 @@ export default function NotFoundPage() {
       <p className="text-4xl">🧭</p>
       <h1 className="text-lg font-bold text-gray-100">Página não encontrada</h1>
       <p className="text-sm text-gray-500">O conteúdo que você procura não existe ou foi movido.</p>
-      <Link to="/" className="mt-2 text-sm font-medium text-violet-400 hover:underline">
+      <Link to="/" className="mt-2 text-sm font-medium text-brand-pink-400 hover:underline">
         Voltar para Todos os Produtos
       </Link>
     </div>

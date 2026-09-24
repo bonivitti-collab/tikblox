@@ -1,4 +1,4 @@
-export default function Sparkline({ data, color = '#22d3ee' }: { data: number[]; color?: string }) {
+export default function Sparkline({ data, color = '#25f4ee' }: { data: number[]; color?: string }) {
   if (data.length === 0) return null
 
   const width = 100

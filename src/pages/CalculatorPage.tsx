@@ -24,7 +24,7 @@ function CampoNumerico({
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-xs font-medium text-gray-400">{label}</span>
-      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 focus-within:border-violet-500/60">
+      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 focus-within:border-brand-pink-500/60">
         {prefixo && <span className="text-sm text-gray-500">{prefixo}</span>}
         <input
           type="number"
@@ -119,9 +119,9 @@ export default function CalculatorPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-violet-500/20 bg-violet-500/10 p-3">
-            <p className="text-[11px] text-violet-300">ROI sobre investimento (custo + frete)</p>
-            <p className="text-lg font-bold text-violet-200">{formatarPercentual(resultado.roi)}</p>
+          <div className="rounded-xl border border-brand-pink-500/20 bg-brand-pink-500/10 p-3">
+            <p className="text-[11px] text-brand-pink-400">ROI sobre investimento (custo + frete)</p>
+            <p className="text-lg font-bold text-brand-pink-400">{formatarPercentual(resultado.roi)}</p>
           </div>
 
           {!lucroPositivo && (

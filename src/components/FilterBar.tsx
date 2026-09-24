@@ -30,7 +30,7 @@ export default function FilterBar({
           value={busca}
           onChange={(e) => onBuscaChange(e.target.value)}
           placeholder="Buscar produto, tag ou descrição..."
-          className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 pl-10 pr-4 text-sm text-gray-100 placeholder:text-gray-500 focus:border-violet-500/60 focus:outline-none focus:ring-1 focus:ring-violet-500/40"
+          className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 pl-10 pr-4 text-sm text-gray-100 placeholder:text-gray-500 focus:border-brand-pink-500/60 focus:outline-none focus:ring-1 focus:ring-brand-pink-500/40"
         />
       </div>
 
@@ -38,7 +38,7 @@ export default function FilterBar({
         <select
           value={nicho}
           onChange={(e) => onNichoChange(e.target.value as Niche | 'todos')}
-          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-violet-500/60 focus:outline-none sm:flex-none"
+          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-brand-pink-500/60 focus:outline-none sm:flex-none"
         >
           <option value="todos">🏷️ Todos os nichos</option>
           {niches.map((n) => (
@@ -51,7 +51,7 @@ export default function FilterBar({
         <select
           value={origem}
           onChange={(e) => onOrigemChange(e.target.value as Origin | 'todos')}
-          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-violet-500/60 focus:outline-none sm:flex-none"
+          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-brand-pink-500/60 focus:outline-none sm:flex-none"
         >
           <option value="todos">🌍 Todas as origens</option>
           {origins.map((o) => (

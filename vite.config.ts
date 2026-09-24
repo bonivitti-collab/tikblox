@@ -16,8 +16,8 @@ export default defineConfig({
         short_name: 'Tikblox',
         description:
           'Dashboard para descobrir produtos virais, calcular margens e organizar favoritos para dropshipping.',
-        theme_color: '#0b0f19',
-        background_color: '#0b0f19',
+        theme_color: '#0b0c12',
+        background_color: '#0b0c12',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',

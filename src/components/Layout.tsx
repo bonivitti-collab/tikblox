@@ -19,7 +19,7 @@ function navLinkClasses(isActive: boolean) {
   return [
     'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all',
     isActive
-      ? 'bg-gradient-to-r from-violet-600/25 to-cyan-500/10 text-white shadow-[inset_0_0_0_1px_rgba(139,92,246,0.35)]'
+      ? 'bg-gradient-to-r from-brand-pink-500/25 to-brand-cyan-500/10 text-white shadow-[inset_0_0_0_1px_rgba(254,44,85,0.35)]'
       : 'text-gray-400 hover:bg-white/5 hover:text-gray-200',
   ].join(' ')
 }
@@ -27,21 +27,19 @@ function navLinkClasses(isActive: boolean) {
 function bottomNavClasses(isActive: boolean) {
   return [
     'flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-medium transition-colors',
-    isActive ? 'text-violet-400' : 'text-gray-500',
+    isActive ? 'text-brand-pink-400' : 'text-gray-500',
   ].join(' ')
 }
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[var(--color-bg-base)] text-gray-100">
-      <div className="pointer-events-none fixed inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_at_top,_rgba(124,58,237,0.18),_transparent_65%)]" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_at_top,_rgba(254,44,85,0.16),_transparent_65%)]" />
 
       <div className="relative mx-auto flex w-full max-w-[1500px]">
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-white/5 bg-[#0d1220]/60 px-4 py-6 md:flex">
+        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-white/5 bg-[#0d0e14]/60 px-4 py-6 md:flex">
           <div className="mb-8 flex items-center gap-2.5 px-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 text-lg shadow-lg shadow-violet-900/40">
-              🧊
-            </span>
+            <img src="/icons/icon-192.png" alt="Tikblox" className="h-9 w-9 rounded-xl shadow-lg shadow-black/40" />
             <div>
               <span className="block text-base font-extrabold leading-none tracking-tight">
                 <span className="gradient-text">Tik</span>blox
@@ -76,9 +74,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="flex min-h-screen w-full flex-col">
           <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/5 bg-[var(--color-bg-base)]/85 px-4 py-3 backdrop-blur md:px-8 md:py-4">
             <div className="flex items-center gap-2 md:hidden">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 text-base">
-                🧊
-              </span>
+              <img src="/icons/icon-192.png" alt="Tikblox" className="h-8 w-8 rounded-lg" />
               <span className="font-bold">
                 <span className="gradient-text">Tik</span>blox
               </span>
@@ -96,7 +92,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               >
                 🔔
               </button>
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 text-sm font-bold text-white">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-pink-500 to-brand-cyan-500 text-sm font-bold text-white">
                 TB
               </div>
             </div>
