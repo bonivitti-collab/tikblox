@@ -13,15 +13,43 @@ export interface ProductFilters {
   onda?: ProductWave | 'todos'
 }
 
-// Simula latência de rede leve para deixar a UI preparada para chamadas
-// assíncronas reais (loading states) desde já.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.trim().replace(/\/$/, '')
 const NETWORK_DELAY_MS = 150
 
 function delay<T>(value: T): Promise<T> {
   return new Promise((resolve) => setTimeout(() => resolve(value), NETWORK_DELAY_MS))
 }
 
+function buildQuery(filters: ProductFilters) {
+  const query = new URLSearchParams()
+  if (filters.busca?.trim()) query.set('search', filters.busca.trim())
+  if (filters.nicho && filters.nicho !== 'todos') query.set('nicho', filters.nicho)
+  if (filters.origem && filters.origem !== 'todos') query.set('origem', filters.origem)
+  if (filters.onda && filters.onda !== 'todos') query.set('onda', filters.onda)
+  const encoded = query.toString()
+  return encoded ? `?${encoded}` : ''
+}
+
+async function fetchApi<T>(path: string): Promise<T> {
+  if (!API_BASE_URL) throw new Error('VITE_API_BASE_URL não configurada')
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    headers: { Accept: 'application/json' },
+  })
+  if (!response.ok) {
+    throw new Error(`API de produtos respondeu HTTP ${response.status}`)
+  }
+  return (await response.json()) as T
+}
+
 export async function fetchProducts(filters: ProductFilters = {}): Promise<Product[]> {
+  if (API_BASE_URL) {
+    try {
+      return await fetchApi<Product[]>(`/products${buildQuery(filters)}`)
+    } catch (error) {
+      console.warn('[Tikblox] API indisponível; usando catálogo offline.', error)
+    }
+  }
+
   const { busca, nicho, origem, onda } = filters
   const termo = busca?.trim().toLowerCase()
 
@@ -43,6 +71,13 @@ export async function fetchProducts(filters: ProductFilters = {}): Promise<Produ
 }
 
 export async function fetchProductById(id: string): Promise<Product | undefined> {
+  if (API_BASE_URL) {
+    try {
+      return await fetchApi<Product>(`/products/${encodeURIComponent(id)}`)
+    } catch (error) {
+      console.warn('[Tikblox] API indisponível; usando produto offline.', error)
+    }
+  }
   return delay(MOCK_PRODUCTS.find((produto) => produto.id === id))
 }
 

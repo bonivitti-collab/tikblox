@@ -73,7 +73,7 @@ cp .env.example .env.local
 
 | Variável              | Uso                                                              |
 | ---------------------- | ----------------------------------------------------------------- |
-| `VITE_API_BASE_URL`     | Base URL da futura API de produtos/fornecedores                   |
+| `VITE_API_BASE_URL`     | Base URL do backend/proxy seguro (`GET /products`, `GET /products/:id`) |
 | `VITE_ANALYTICS_ID`     | ID de analytics (ex.: Plausible/GA), opcional                     |
 
 Qualquer chave secreta (tokens de API, credenciais de fornecedor, etc.) deve
@@ -90,7 +90,26 @@ A UI nunca importa `mockProducts.ts` diretamente — todo acesso passa por
    mantendo as assinaturas e os tipos em `src/types/product.ts`.
 2. Se os campos da API divergirem, adicione uma camada de mapeamento dentro
    do repositório (não na UI).
-3. Remova/mantenha `mockProducts.ts` apenas como fixture de testes/dev.
+3. Remova/mantenha `mockProducts.ts` apenas como fallback offline/fixture de testes.
+
+### Integração com APIs reais
+
+O PWA não chama diretamente Shopee, TikTok, AliExpress ou provedores de tendências:
+isso exporia credenciais no navegador e não funciona de forma confiável com CORS.
+Configure um backend/serverless separado com autenticação, cache e rate limiting, e
+aponte `VITE_API_BASE_URL` para ele. O contrato mínimo é:
+
+```http
+GET /products?search=&nicho=&origem=&onda=
+GET /products/:id
+```
+
+As respostas devem ser objetos `Product` conforme `src/types/product.ts`. O repositório
+usa a API quando `VITE_API_BASE_URL` existe e retorna ao catálogo local com aviso no
+console quando o backend está indisponível, preservando a experiência offline.
+
+Nunca coloque chaves de APIs em `VITE_*`: variáveis Vite são públicas no bundle. As
+credenciais devem ficar somente no backend (por exemplo, secrets do provedor serverless).
 
 ## Estrutura de pastas
 
