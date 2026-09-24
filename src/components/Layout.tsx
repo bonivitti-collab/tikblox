@@ -39,7 +39,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-30 border-b border-white/5 bg-[#0b0c12]/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-[1500px] items-center gap-4 px-4 py-3 md:px-8">
           <div className="flex shrink-0 items-center gap-2.5">
-            <img src="/icons/icon-192.png" alt="Tikblox" className="h-9 w-9 rounded-xl shadow-lg shadow-black/40" />
+            <img src={`${import.meta.env.BASE_URL}icons/icon-192.png`} alt="Tikblox" className="h-9 w-9 rounded-xl shadow-lg shadow-black/40" />
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base font-extrabold leading-none tracking-tight text-white">TIKBLOX</span>
