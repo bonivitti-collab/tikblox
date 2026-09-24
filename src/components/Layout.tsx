@@ -15,11 +15,11 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/favoritos', label: 'Favoritos', icon: '⭐' },
 ]
 
-function navLinkClasses(isActive: boolean) {
+function navPillClasses(isActive: boolean) {
   return [
-    'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all',
+    'flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-bold transition-all sm:text-sm',
     isActive
-      ? 'bg-gradient-to-r from-brand-pink-500/25 to-brand-cyan-500/10 text-white shadow-[inset_0_0_0_1px_rgba(254,44,85,0.35)]'
+      ? 'bg-gradient-to-r from-brand-pink-500 to-brand-pink-600 text-white shadow-lg shadow-brand-pink-900/30'
       : 'text-gray-400 hover:bg-white/5 hover:text-gray-200',
   ].join(' ')
 }
@@ -36,81 +36,58 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-[var(--color-bg-base)] text-gray-100">
       <div className="pointer-events-none fixed inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_at_top,_rgba(254,44,85,0.16),_transparent_65%)]" />
 
-      <div className="relative mx-auto flex w-full max-w-[1500px]">
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-white/5 bg-[#0d0e14]/60 px-4 py-6 md:flex">
-          <div className="mb-8 flex items-center gap-2.5 px-2">
+      <header className="sticky top-0 z-30 border-b border-white/5 bg-[#0b0c12]/90 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-[1500px] items-center gap-4 px-4 py-3 md:px-8">
+          <div className="flex shrink-0 items-center gap-2.5">
             <img src="/icons/icon-192.png" alt="Tikblox" className="h-9 w-9 rounded-xl shadow-lg shadow-black/40" />
             <div>
-              <span className="block text-base font-extrabold leading-none tracking-tight">
-                <span className="gradient-text">Tik</span>blox
-              </span>
-              <span className="text-[10px] font-medium uppercase tracking-widest text-gray-600">
-                Product Research
-              </span>
-            </div>
-          </div>
-
-          <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-gray-600">
-            Navegação
-          </p>
-          <nav className="flex flex-1 flex-col gap-1">
-            {NAV_ITEMS.map((item) => (
-              <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => navLinkClasses(isActive)}>
-                <span className="text-base" aria-hidden="true">
-                  {item.icon}
+              <div className="flex items-center gap-2">
+                <span className="text-base font-extrabold leading-none tracking-tight text-white">TIKBLOX</span>
+                <span className="hidden items-center gap-1 rounded-full bg-brand-pink-500/15 px-2 py-0.5 text-[10px] font-bold text-brand-pink-400 ring-1 ring-inset ring-brand-pink-500/30 sm:flex">
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-pink-500" />
+                  RADAR BR
                 </span>
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          <div className="card-surface rounded-2xl p-4">
-            <p className="text-xs font-semibold text-gray-200">🚀 Domínio oficial</p>
-            <p className="mt-1 text-[11px] text-gray-500">Publicando em breve em</p>
-            <p className="gradient-text text-sm font-bold">tikblox.com.br</p>
-          </div>
-        </aside>
-
-        <div className="flex min-h-screen w-full flex-col">
-          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/5 bg-[var(--color-bg-base)]/85 px-4 py-3 backdrop-blur md:px-8 md:py-4">
-            <div className="flex items-center gap-2 md:hidden">
-              <img src="/icons/icon-192.png" alt="Tikblox" className="h-8 w-8 rounded-lg" />
-              <span className="font-bold">
-                <span className="gradient-text">Tik</span>blox
-              </span>
-            </div>
-
-            <div className="ml-auto hidden items-center gap-3 md:flex">
-              <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-400 ring-1 ring-inset ring-emerald-500/20">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                Dados atualizados agora
-              </span>
-              <button
-                type="button"
-                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-base hover:bg-white/10"
-                aria-label="Notificações"
-              >
-                🔔
-              </button>
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-pink-500 to-brand-cyan-500 text-sm font-bold text-white">
-                TB
               </div>
+              <span className="hidden text-[9px] font-semibold uppercase tracking-widest text-gray-500 md:block">
+                Spy Viral <span className="text-brand-pink-500">•</span> Arbitragem{' '}
+                <span className="text-brand-cyan-400">•</span> Dropshipping
+              </span>
             </div>
-          </header>
+          </div>
 
-          <main className="flex-1 px-4 pb-24 pt-4 md:px-8 md:pb-10 md:pt-6">{children}</main>
-
-          <nav className="fixed inset-x-0 bottom-0 z-20 flex border-t border-white/10 bg-[#0f1420]/95 backdrop-blur md:hidden">
+          <nav className="hide-scrollbar flex flex-1 items-center gap-1 overflow-x-auto">
             {NAV_ITEMS.map((item) => (
-              <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => bottomNavClasses(isActive)}>
-                <span className="text-lg" aria-hidden="true">
-                  {item.icon}
-                </span>
-                {item.label}
+              <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => navPillClasses(isActive)}>
+                <span aria-hidden="true">{item.icon}</span>
+                <span className="hidden md:inline">{item.label}</span>
               </NavLink>
             ))}
           </nav>
+
+          <div className="hidden shrink-0 items-center gap-2 lg:flex">
+            <span className="flex items-center gap-1.5 rounded-full border border-brand-cyan-500/30 bg-brand-cyan-500/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan-400">
+              🔄 Escanear Tendências
+            </span>
+            <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-300">
+              🔔 Push
+            </span>
+          </div>
         </div>
+      </header>
+
+      <div className="relative mx-auto flex w-full max-w-[1500px] flex-col">
+        <main className="flex-1 px-4 pb-24 pt-5 md:px-8 md:pb-10 md:pt-6">{children}</main>
+
+        <nav className="fixed inset-x-0 bottom-0 z-20 flex border-t border-white/10 bg-[#0b0c12]/95 backdrop-blur md:hidden">
+          {NAV_ITEMS.map((item) => (
+            <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => bottomNavClasses(isActive)}>
+              <span className="text-lg" aria-hidden="true">
+                {item.icon}
+              </span>
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
       </div>
     </div>
   )

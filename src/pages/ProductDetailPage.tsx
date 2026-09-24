@@ -12,12 +12,51 @@ const CONCORRENCIA_COR: Record<string, string> = {
   Alta: 'text-red-400',
 }
 
+const SATURACAO_COR: Record<string, string> = {
+  Baixa: 'text-emerald-400',
+  Média: 'text-amber-400',
+  Alta: 'text-red-400',
+}
+
+function construirLinksDiagnostico(produto: Product) {
+  const termo = encodeURIComponent(produto.nome)
+  return [
+    {
+      nome: 'Shopee Brasil',
+      cor: 'text-amber-400',
+      url: `https://shopee.com.br/search?keyword=${termo}`,
+      texto:
+        produto.saturacaoBR === 'Baixa'
+          ? 'Poucos vendedores ativos; maioria com envio internacional lento e sem estoque nacional.'
+          : produto.saturacaoBR === 'Média'
+            ? 'Alguns vendedores já ativos, mas ainda com espaço para diferenciação de oferta.'
+            : 'Mercado com vários vendedores estabelecidos e forte concorrência de preço.',
+    },
+    {
+      nome: 'Mercado Livre Full',
+      cor: 'text-yellow-300',
+      url: `https://lista.mercadolivre.com.br/${termo}`,
+      texto: 'Verifique concorrentes com Mercado Envios Full e compare preços/avaliações antes de precificar.',
+    },
+    {
+      nome: 'TikTok Viral',
+      cor: 'text-brand-pink-400',
+      url: `https://www.tiktok.com/search?q=${termo}`,
+      texto:
+        produto.onda === 'onda-inicial'
+          ? 'Oceano azul: vídeos começam a viralizar organicamente, poucos anunciantes estruturados.'
+          : 'Já existem criadores/anunciantes explorando esse produto — analise os criativos de maior engajamento.',
+    },
+  ]
+}
+
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { ehFavorito, alternarFavorito } = useFavorites()
   const [produto, setProduto] = useState<Product | null | undefined>(undefined)
   const [linkCopiado, setLinkCopiado] = useState(false)
+  const [ganchoCopiado, setGanchoCopiado] = useState<number | null>(null)
 
   useEffect(() => {
     if (!id) return
@@ -57,6 +96,16 @@ export default function ProductDetailPage() {
     }
   }
 
+  async function copiarGancho(texto: string, index: number) {
+    try {
+      await navigator.clipboard.writeText(texto)
+      setGanchoCopiado(index)
+      setTimeout(() => setGanchoCopiado(null), 1500)
+    } catch {
+      // clipboard indisponível — sem ação adicional
+    }
+  }
+
   if (produto === undefined) {
     return <div className="animate-pulse text-sm text-gray-500">Carregando produto...</div>
   }
@@ -74,6 +123,10 @@ export default function ProductDetailPage() {
 
   const margem = calcularMargem(produto.custo, produto.precoSugerido)
   const favorito = ehFavorito(produto.id)
+  const url = typeof window !== 'undefined' ? window.location.href : ''
+  const textoCompartilhamento = `${produto.nome}: tendência viral de produtos do exterior. Lucro estimado de ${formatarMoeda(
+    produto.precoSugerido - produto.custo,
+  )} (+${formatarPercentual(margem, 0)}) e viralidade ${produto.scoreViral}/100.`
 
   return (
     <div className="flex flex-col gap-6 pb-6">
@@ -95,6 +148,9 @@ export default function ProductDetailPage() {
 
         <div className="flex flex-col gap-4">
           <div>
+            <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-brand-pink-500/15 px-2.5 py-1 text-[10px] font-bold text-brand-pink-400 ring-1 ring-inset ring-brand-pink-500/30">
+              🧬 Raio-X de Inteligência Tikblox
+            </span>
             <div className="mb-1 flex items-center gap-2 text-xs text-gray-500">
               <span>{produto.nicho}</span>
               <span>•</span>
@@ -103,10 +159,13 @@ export default function ProductDetailPage() {
               <span>👁 {formatarVisualizacoes(produto.visualizacoes)}</span>
             </div>
             <h1 className="text-xl font-bold text-gray-100 md:text-2xl">{produto.nome}</h1>
+            <p className="mt-1 text-xs italic text-gray-500">
+              Nome de busca internacional: {produto.termoBuscaInternacional}
+            </p>
             <p className="mt-2 text-sm text-gray-400">{produto.descricaoCurta}</p>
           </div>
 
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             <div className="card-surface rounded-xl p-3 text-center">
               <p className="text-[11px] text-gray-500">Custo</p>
               <p className="text-sm font-bold text-gray-100">{formatarMoeda(produto.custo)}</p>
@@ -116,8 +175,12 @@ export default function ProductDetailPage() {
               <p className="text-sm font-bold text-gray-100">{formatarMoeda(produto.precoSugerido)}</p>
             </div>
             <div className="card-surface rounded-xl p-3 text-center">
-              <p className="text-[11px] text-emerald-500">Margem</p>
+              <p className="text-[11px] text-emerald-500">Margem bruta</p>
               <p className="text-sm font-bold text-emerald-400">{formatarPercentual(margem, 0)}</p>
+            </div>
+            <div className="card-surface rounded-xl p-3 text-center">
+              <p className="text-[11px] text-gray-500">Score viral</p>
+              <p className="text-sm font-bold text-brand-pink-400">{produto.scoreViral}/100</p>
             </div>
           </div>
 
@@ -198,6 +261,89 @@ export default function ProductDetailPage() {
       </section>
 
       <section className="card-surface rounded-2xl p-5">
+        <h2 className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-100">
+          🛍️ Diagnóstico de Mercado no Brasil (Oceano Azul)
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {construirLinksDiagnostico(produto).map((coluna) => (
+            <div key={coluna.nome} className="rounded-xl border border-white/5 bg-white/5 p-3">
+              <div className="mb-2 flex items-center justify-between">
+                <span className={`text-xs font-bold ${coluna.cor}`}>{coluna.nome}</span>
+                <a
+                  href={coluna.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[11px] font-semibold text-brand-cyan-400 hover:underline"
+                >
+                  Checar ↗
+                </a>
+              </div>
+              <p className="text-xs leading-relaxed text-gray-400">{coluna.texto}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 rounded-xl border border-brand-cyan-500/20 bg-brand-cyan-500/5 p-3">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-brand-cyan-400">Entendimento cultural</p>
+          <p className="mt-1 text-sm text-gray-300">{produto.entendimentoCultural}</p>
+        </div>
+      </section>
+
+      <section id="ganchos" className="card-surface scroll-mt-24 rounded-2xl p-5">
+        <h2 className="mb-3 text-sm font-bold text-gray-100">🎬 Ganchos de Anúncio Testados (Primeiros 3 segundos)</h2>
+        <div className="flex flex-col gap-2">
+          {produto.ganchosAnuncio.map((gancho, index) => (
+            <div
+              key={gancho}
+              className="flex items-center justify-between gap-2 rounded-xl border border-white/5 bg-white/5 p-3"
+            >
+              <p className="text-sm text-gray-200">{gancho}</p>
+              <button
+                type="button"
+                onClick={() => copiarGancho(gancho, index)}
+                className="shrink-0 rounded-lg border border-white/10 px-2 py-1 text-[11px] font-semibold text-gray-400 hover:bg-white/10"
+              >
+                {ganchoCopiado === index ? '✅' : '📋'}
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="card-surface rounded-2xl p-5">
+        <h2 className="mb-3 text-sm font-bold text-gray-100">📦 Onde Encontrar Fornecedores Rápidos</h2>
+        <div className="flex flex-wrap gap-2">
+          <a
+            href={`https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(produto.termoBuscaInternacional)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs font-bold text-amber-400 hover:bg-amber-500/20"
+          >
+            AliExpress (Busca Direta) ↗
+          </a>
+          <a
+            href={`https://cjdropshipping.com/search-results.html?keyword=${encodeURIComponent(produto.termoBuscaInternacional)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-gray-200 hover:bg-white/10"
+          >
+            CJ Dropshipping ↗
+          </a>
+          <a
+            href={`https://trends.google.com.br/trends/explore?geo=BR&q=${encodeURIComponent(produto.nome)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold text-emerald-400 hover:bg-emerald-500/20"
+          >
+            Google Trends Brasil ↗
+          </a>
+        </div>
+        <p className="mt-3 text-xs text-gray-500">
+          Logística & Despacho: consulte prazos e frete diretamente com o fornecedor antes de negociar o pedido
+          mínimo.
+        </p>
+      </section>
+
+      <section className="card-surface rounded-2xl p-5">
         <h2 className="mb-3 text-sm font-bold text-gray-100">🏭 Fornecedores</h2>
         <div className="flex flex-col gap-3">
           {produto.fornecedores.map((fornecedor) => (
@@ -227,7 +373,12 @@ export default function ProductDetailPage() {
       </section>
 
       <section className="card-surface rounded-2xl p-5">
-        <h2 className="mb-3 text-sm font-bold text-gray-100">🗺️ Plano de Ação</h2>
+        <h2 className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-100">
+          🗺️ Plano de Ação para Surfar Essa Onda
+          <span className={`text-[10px] font-bold ${SATURACAO_COR[produto.saturacaoBR]}`}>
+            Saturação BR: {produto.saturacaoBR}
+          </span>
+        </h2>
         <ol className="flex flex-col gap-3">
           {produto.planoDeAcao.map((passo, index) => (
             <li key={passo.titulo} className="flex gap-3">
@@ -241,6 +392,48 @@ export default function ProductDetailPage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="card-surface rounded-2xl p-5">
+        <h2 className="mb-3 text-sm font-bold text-gray-100">🌐 Metadados SEO & Compartilhamento (tikblox.com.br)</h2>
+        <div className="rounded-xl border border-white/5 bg-black/20 p-3">
+          <p className="truncate text-[11px] text-gray-500">tikblox.com.br/produto/{produto.id}</p>
+          <p className="mt-1 text-sm font-bold text-gray-100">{produto.nome} | Radar Viral Tikblox</p>
+          <p className="mt-1 text-xs text-gray-400">{textoCompartilhamento}</p>
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={compartilhar}
+            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-semibold text-gray-200 hover:bg-white/10"
+          >
+            {linkCopiado ? '✅ Copiado' : '📋 Copiar Link'}
+          </button>
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(`${textoCompartilhamento} ${url}`)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20"
+          >
+            WhatsApp
+          </a>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(textoCompartilhamento)}&url=${encodeURIComponent(url)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-200 hover:bg-white/10"
+          >
+            X / Twitter
+          </a>
+          <a
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-brand-cyan-500/30 bg-brand-cyan-500/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan-400 hover:bg-brand-cyan-500/20"
+          >
+            LinkedIn
+          </a>
+        </div>
       </section>
 
       <div className="flex flex-wrap gap-2">

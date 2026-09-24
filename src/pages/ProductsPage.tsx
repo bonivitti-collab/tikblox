@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import FilterBar from '../components/FilterBar'
+import Hero from '../components/Hero'
 import ProductCard from '../components/ProductCard'
 import StatsOverview, { type StatItem } from '../components/StatsOverview'
 import { useFavorites } from '../hooks/useFavorites'
@@ -77,6 +78,11 @@ export default function ProductsPage({ preset }: { preset: ProductsPreset }) {
 
   const info = PRESET_INFO[preset]
 
+  const margemMediaGeral = useMemo(() => {
+    if (produtos.length === 0) return 0
+    return produtos.reduce((acc, p) => acc + calcularMargem(p.custo, p.precoSugerido), 0) / produtos.length
+  }, [produtos])
+
   const stats: StatItem[] = useMemo(() => {
     if (produtosFiltrados.length === 0) {
       return [
@@ -103,10 +109,14 @@ export default function ProductsPage({ preset }: { preset: ProductsPreset }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div>
-        <h1 className="text-xl font-bold text-gray-100 md:text-2xl">{info.titulo}</h1>
-        <p className="mt-1 text-sm text-gray-500">{info.subtitulo}</p>
-      </div>
+      {preset === 'todos' ? (
+        <Hero produtosMonitorados={produtos.length} roiMedio={margemMediaGeral} />
+      ) : (
+        <div>
+          <h1 className="text-xl font-bold text-gray-100 md:text-2xl">{info.titulo}</h1>
+          <p className="mt-1 text-sm text-gray-500">{info.subtitulo}</p>
+        </div>
+      )}
 
       <StatsOverview stats={stats} />
 
@@ -122,15 +132,15 @@ export default function ProductsPage({ preset }: { preset: ProductsPreset }) {
       />
 
       {carregando ? (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="aspect-[3/4] animate-pulse rounded-2xl bg-white/5" />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-96 animate-pulse rounded-2xl bg-white/5" />
           ))}
         </div>
       ) : produtosFiltrados.length === 0 ? (
         <div className="card-surface rounded-2xl p-10 text-center text-sm text-gray-500">{info.vazio}</div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {produtosFiltrados.map((produto) => (
             <ProductCard key={produto.id} product={produto} />
           ))}

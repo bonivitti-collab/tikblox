@@ -59,6 +59,22 @@ export interface Product {
   fornecedores: SupplierInfo[]
   planoDeAcao: ActionStep[]
   tags: string[]
+  /** Termo de busca internacional usado para localizar o produto na origem (ex.: AliExpress/Amazon). */
+  termoBuscaInternacional: string
+  /** Rótulo de destaque exibido no card (ex.: "Ápice de Demanda (Volume Alto)"). */
+  tagCategoria: string
+  /** Fonte onde a tendência foi validada (ex.: "TikTok EDC Gear & Amazon US Best Sellers"). */
+  origemTendencia: string
+  /** Rótulo de velocidade de tendência (ex.: "Peak Volume", "Rising Fast"). */
+  trendVelocity: string
+  /** Número de buscas/menções usado como prova social. */
+  buscas: number
+  /** Nível de saturação de anunciantes no Brasil. */
+  saturacaoBR: 'Baixa' | 'Média' | 'Alta'
+  /** Explicação cultural de por que o produto vende bem no Brasil. */
+  entendimentoCultural: string
+  /** Ganchos de anúncio (primeiros 3 segundos) testados para o produto. */
+  ganchosAnuncio: string[]
 }
 
 export interface CalculatorInput {

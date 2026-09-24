@@ -63,6 +63,19 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Escalar fornecedor', descricao: 'Negociar lote de 100+ unidades com fornecedor nacional para reduzir prazo.' },
     ],
     tags: ['massagem', 'fitness', 'recuperação muscular', 'percussão'],
+    termoBuscaInternacional: 'Mini Percussion Muscle Massager Portable',
+    tagCategoria: 'Ápice de Demanda (Volume Alto)',
+    origemTendencia: 'TikTok Fitness Gear & Amazon US Best Sellers',
+    trendVelocity: 'Peak Volume',
+    buscas: 61,
+    saturacaoBR: 'Baixa',
+    entendimentoCultural:
+      'Dor muscular pós-treino é queixa universal em academias lotadas, e fisioterapia particular é cara. Um dispositivo compacto que cabe na bolsa e resolve na hora vira item de desejo imediato.',
+    ganchosAnuncio: [
+      '"Sua academia lotada e sem tempo pra fisioterapia? Isso resolve em 5 minutos."',
+      '"Atletas profissionais usam isso antes de qualquer treino pesado."',
+      '"Dor nas costas depois do treino? Aperte o botão e sinta o alívio."',
+    ],
   },
   {
     id: 'luminaria-nuvem-led',
@@ -105,6 +118,19 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Bundle', descricao: 'Testar combo com controle remoto extra para aumentar ticket médio.' },
     ],
     tags: ['decoração', 'led', 'quarto', 'gamer'],
+    termoBuscaInternacional: 'Cloud Lightning Lamp RGB Sound Sensor',
+    tagCategoria: 'Onda Crescente (Alta Tração)',
+    origemTendencia: 'TikTok Room Decor & Amazon US Best Sellers',
+    trendVelocity: 'Rising Fast',
+    buscas: 48,
+    saturacaoBR: 'Média',
+    entendimentoCultural:
+      'Quartos viraram estúdio de conteúdo: jovens gravam vídeos e fazem lives o dia todo. Um item que muda a "vibe" do ambiente com luz e som é compartilhável e gera prova social orgânica.',
+    ganchosAnuncio: [
+      '"Seu quarto merece esse upgrade de R$89 que todo mundo tá comprando."',
+      '"Ela troca a luz do quarto e o efeito de trovão surpreende todo mundo."',
+      '"Isso aqui vira o cantinho mais fotografado da casa."',
+    ],
   },
   {
     id: 'escova-secadora-ionica',
@@ -154,6 +180,19 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Garantia', descricao: 'Oferecer garantia estendida para reduzir objeção de qualidade.' },
     ],
     tags: ['cabelo', 'beleza', 'secador', 'iônico'],
+    termoBuscaInternacional: 'Hot Air Brush Ionic 3 in 1 Styler',
+    tagCategoria: 'Consolidado (Alta Recompra)',
+    origemTendencia: 'TikTok Beauty Tools & Amazon US Best Sellers',
+    trendVelocity: 'Steady Demand',
+    buscas: 73,
+    saturacaoBR: 'Alta',
+    entendimentoCultural:
+      'Salão de beleza é caro e demorado. Um produto que promete o resultado de um "escova progressiva" em casa, todo dia, sem sair de casa, resolve uma dor recorrente das mulheres brasileiras.',
+    ganchosAnuncio: [
+      '"Cansada de gastar R$80 no salão toda semana? Isso resolve em casa."',
+      '"3 em 1: seca, modela e alisa numa passada só."',
+      '"Chega de cabelo com frizz: essa tecnologia iônica muda o jogo."',
+    ],
   },
   {
     id: 'coleira-gps-pet',
@@ -193,6 +232,19 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Parceria', descricao: 'Buscar parceria com pet shops locais para pós-venda e suporte.' },
     ],
     tags: ['pet', 'gps', 'segurança', 'coleira'],
+    termoBuscaInternacional: 'Smart GPS Pet Tracker Collar Waterproof',
+    tagCategoria: 'Ápice de Demanda (Volume Alto)',
+    origemTendencia: 'TikTok PetTok & Amazon US Best Sellers',
+    trendVelocity: 'Rising Fast',
+    buscas: 39,
+    saturacaoBR: 'Baixa',
+    entendimentoCultural:
+      'Fuga de pets em datas de fogos e o medo de furto de animais de raça geram ansiedade real nos tutores. Rastreamento em tempo real converte essa angústia em decisão de compra rápida.',
+    ganchosAnuncio: [
+      '"Seu pet fugiu durante os fogos? Isso poderia ter evitado."',
+      '"Veja em tempo real onde seu cachorro está, direto no celular."',
+      '"Tutores de pet premium já não saem de casa sem isso."',
+    ],
   },
   {
     id: 'organizador-cabos-magnetico',
@@ -231,6 +283,18 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Reposicionar', descricao: 'Usar apenas como item de upsell/bundle, não como produto principal.' },
     ],
     tags: ['organização', 'cabos', 'escritório'],
+    termoBuscaInternacional: 'Magnetic Cable Organizer Clips Desk',
+    tagCategoria: 'Saturado (Declínio)',
+    origemTendencia: 'TikTok Desk Setup & Amazon US Best Sellers',
+    trendVelocity: 'Declining',
+    buscas: 12,
+    saturacaoBR: 'Alta',
+    entendimentoCultural:
+      'Home office e setup gamer viraram padrão, mas o item já passou pelo pico de novidade — hoje funciona melhor como complemento de checkout do que como produto de anúncio principal.',
+    ganchosAnuncio: [
+      '"Sua mesa parece um ninho de cabo? Resolve com 3 clipes magnéticos."',
+      '"Organize sua mesa gamer em 30 segundos."',
+    ],
   },
   {
     id: 'body-shaper-modelador',
@@ -271,6 +335,19 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Criativo compliance', descricao: 'Adaptar criativos às políticas de anúncio para evitar reprovação.' },
     ],
     tags: ['moda', 'modelador', 'compressão'],
+    termoBuscaInternacional: 'High Compression Body Shaper Shapewear',
+    tagCategoria: 'Onda Forte',
+    origemTendencia: 'TikTok Shapewear & Mercado Livre Full',
+    trendVelocity: 'Rising Fast',
+    buscas: 55,
+    saturacaoBR: 'Média',
+    entendimentoCultural:
+      'Autoestima antes de eventos (formatura, casamento, praia) é gatilho forte no Brasil. Um modelador que promete resultado imediato e visível em fotos converte muito bem em vídeos de "antes e depois".',
+    ganchosAnuncio: [
+      '"Photoshop de verdade: veja a diferença antes de sair de casa."',
+      '"Vai ter festa esse fim de semana? Isso resolve sua barriga em 2 minutos."',
+      '"Compressão que modela sem sufocar — testado por 3 tamanhos."',
+    ],
   },
   {
     id: 'kit-berco-portatil',
@@ -310,6 +387,19 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Conteúdo de confiança', descricao: 'Investir em depoimentos de mães reais e selo de segurança nos anúncios.' },
     ],
     tags: ['bebê', 'berço', 'viagem', 'portátil'],
+    termoBuscaInternacional: 'Portable Foldable Travel Baby Crib',
+    tagCategoria: 'Onda Inicial (Ticket Alto)',
+    origemTendencia: 'TikTok Parenting & Amazon US Best Sellers',
+    trendVelocity: 'Rising Fast',
+    buscas: 21,
+    saturacaoBR: 'Baixa',
+    entendimentoCultural:
+      'Viajar com bebê no Brasil é sinônimo de logística complicada e falta de estrutura em pousadas/casas de parentes. Um berço que dobra e cabe na mala resolve uma dor real de pais que viajam nas férias.',
+    ganchosAnuncio: [
+      '"Viajar com bebê não precisa ser um pesadelo de bagagem."',
+      '"Berço que dobra igual guarda-chuva e cabe no porta-malas."',
+      '"Pais que viajam toda férias já não saem de casa sem isso."',
+    ],
   },
   {
     id: 'suporte-celular-veicular',
@@ -348,5 +438,17 @@ export const MOCK_PRODUCTS: Product[] = [
       { titulo: 'Público de nicho', descricao: 'Direcionar campanhas para grupos de motoristas de aplicativo.' },
     ],
     tags: ['carro', 'carregador', 'wireless', 'suporte'],
+    termoBuscaInternacional: 'Wireless Charger Car Mount Vent Holder',
+    tagCategoria: 'Consolidado (Uso Diário)',
+    origemTendencia: 'TikTok Car Accessories & Amazon US Best Sellers',
+    trendVelocity: 'Steady Demand',
+    buscas: 44,
+    saturacaoBR: 'Média',
+    entendimentoCultural:
+      'Motoristas de aplicativo passam horas no carro e dependem 100% do celular carregado para trabalhar. Um suporte que carrega sem fio e prende com firmeza resolve um problema operacional diário.',
+    ganchosAnuncio: [
+      '"Motorista de app: seu celular nunca mais fica sem bateria no meio da corrida."',
+      '"Prende no ar-condicionado e carrega sem fio — só encaixar."',
+    ],
   },
 ]
