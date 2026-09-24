@@ -22,7 +22,7 @@ export default function FilterBar({
   origins,
 }: FilterBarProps) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div className="card-surface flex flex-col gap-3 rounded-2xl p-3 sm:flex-row sm:items-center">
       <div className="relative flex-1">
         <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">🔍</span>
         <input
@@ -34,31 +34,33 @@ export default function FilterBar({
         />
       </div>
 
-      <select
-        value={nicho}
-        onChange={(e) => onNichoChange(e.target.value as Niche | 'todos')}
-        className="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-violet-500/60 focus:outline-none"
-      >
-        <option value="todos">Todos os nichos</option>
-        {niches.map((n) => (
-          <option key={n} value={n}>
-            {n}
-          </option>
-        ))}
-      </select>
+      <div className="flex gap-2">
+        <select
+          value={nicho}
+          onChange={(e) => onNichoChange(e.target.value as Niche | 'todos')}
+          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-violet-500/60 focus:outline-none sm:flex-none"
+        >
+          <option value="todos">🏷️ Todos os nichos</option>
+          {niches.map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
+          ))}
+        </select>
 
-      <select
-        value={origem}
-        onChange={(e) => onOrigemChange(e.target.value as Origin | 'todos')}
-        className="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-violet-500/60 focus:outline-none"
-      >
-        <option value="todos">Todas as origens</option>
-        {origins.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
+        <select
+          value={origem}
+          onChange={(e) => onOrigemChange(e.target.value as Origin | 'todos')}
+          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-gray-200 focus:border-violet-500/60 focus:outline-none sm:flex-none"
+        >
+          <option value="todos">🌍 Todas as origens</option>
+          {origins.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   )
 }

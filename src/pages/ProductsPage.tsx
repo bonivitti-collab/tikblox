@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import FilterBar from '../components/FilterBar'
 import ProductCard from '../components/ProductCard'
+import StatsOverview, { type StatItem } from '../components/StatsOverview'
 import { useFavorites } from '../hooks/useFavorites'
 import { calcularMargem, fetchProducts, getAllNiches, getAllOrigins } from '../data/productsRepository'
+import { formatarMoeda, formatarPercentual } from '../utils/format'
 import type { Niche, Origin, Product } from '../types/product'
 
 export type ProductsPreset = 'todos' | 'ondas-iniciais' | 'alta-margem' | 'favoritos'
@@ -75,12 +77,38 @@ export default function ProductsPage({ preset }: { preset: ProductsPreset }) {
 
   const info = PRESET_INFO[preset]
 
+  const stats: StatItem[] = useMemo(() => {
+    if (produtosFiltrados.length === 0) {
+      return [
+        { label: 'Produtos', valor: '0', icone: '📦' },
+        { label: 'Score médio', valor: '—', icone: '🔥' },
+        { label: 'Margem média', valor: '—', icone: '💰' },
+        { label: 'Favoritos', valor: `${favoritos.length}`, icone: '⭐' },
+      ]
+    }
+
+    const scoreMedio = produtosFiltrados.reduce((acc, p) => acc + p.scoreViral, 0) / produtosFiltrados.length
+    const margemMedia =
+      produtosFiltrados.reduce((acc, p) => acc + calcularMargem(p.custo, p.precoSugerido), 0) /
+      produtosFiltrados.length
+    const tendenciaMedia = produtosFiltrados.reduce((acc, p) => acc + p.precoSugerido - p.custo, 0)
+
+    return [
+      { label: 'Produtos', valor: `${produtosFiltrados.length}`, icone: '📦' },
+      { label: 'Score médio', valor: scoreMedio.toFixed(0), icone: '🔥', destaque: 'positivo' },
+      { label: 'Margem média', valor: formatarPercentual(margemMedia, 0), icone: '💰', destaque: 'positivo' },
+      { label: 'Lucro potencial', valor: formatarMoeda(tendenciaMedia), icone: '📈' },
+    ]
+  }, [produtosFiltrados, favoritos.length])
+
   return (
     <div className="flex flex-col gap-5">
       <div>
         <h1 className="text-xl font-bold text-gray-100 md:text-2xl">{info.titulo}</h1>
         <p className="mt-1 text-sm text-gray-500">{info.subtitulo}</p>
       </div>
+
+      <StatsOverview stats={stats} />
 
       <FilterBar
         busca={busca}
