@@ -3,6 +3,7 @@ import FilterBar from '../components/FilterBar'
 import Hero from '../components/Hero'
 import ProductCard from '../components/ProductCard'
 import StatsOverview, { type StatItem } from '../components/StatsOverview'
+import IntelligenceOverview from '../components/IntelligenceOverview'
 import { useFavorites } from '../hooks/useFavorites'
 import { calcularMargem, fetchProducts, getAllNiches, getAllOrigins } from '../data/productsRepository'
 import { formatarMoeda, formatarPercentual } from '../utils/format'
@@ -119,6 +120,8 @@ export default function ProductsPage({ preset }: { preset: ProductsPreset }) {
       )}
 
       <StatsOverview stats={stats} />
+
+      {preset === 'todos' && !carregando ? <IntelligenceOverview products={produtos} /> : null}
 
       <FilterBar
         busca={busca}
